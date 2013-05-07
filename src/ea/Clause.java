@@ -29,7 +29,7 @@ public class Clause {
 			if(literals[2][i] == 1){
 				res = val;
 			} else {
-				// literal in negative form, so e take the inverse value
+				// literal in negative form, so we take the inverse value
 				res = (byte)(1-val);
 			}
 			

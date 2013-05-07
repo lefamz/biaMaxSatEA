@@ -49,6 +49,7 @@ public class Main {
 		System.out.println(cross[0]);
 		System.out.println(cross[1]);
 		
+		
 		/*EvoAlg genEA = new EvoAlg(nClauses, nLiterals, formula, popCap);
 		genEA.runGenerational();
 		

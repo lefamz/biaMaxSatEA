@@ -20,11 +20,6 @@ public class Individual implements Comparable<Individual> {
 		fitness = 0;
 		values = new byte[n];
 	}
-
-	@Override
-	public int compareTo(Individual o) {
-		return Double.compare(this.fitness, o.fitness);
-	}
 	
 	/** fitness is number of satisfied clauses */
 	public void calcFitness(ArrayList<Clause> clauses){
@@ -39,13 +34,25 @@ public class Individual implements Comparable<Individual> {
 	public void randInit(){
 		for (int i = 0; i < values.length; i++) {
 			
-			double r = MyConstants.random.nextDouble();
-			
-			if(r>0.5){
+			if(MyConstants.random.nextDouble()>0.5){
 				values[i]=1;
 			} else {
 				values[i]=0;
 			}
+		}
+	}
+	
+	/** Mutation procedure. We allways try to mutate n=ceil(1/6) of literals. Mutation of one literal is done with probability 1/n. */
+	public void mutate(){
+		int len = this.values.length;
+		int n = (int)Math.ceil(((double)len)/6);
+		
+		for (int i = 0; i < n; i++) {
+			if(MyConstants.random.nextDouble() <= 1.00/n){
+				int which = MyConstants.random.nextInt(len);
+				this.values[which]=(byte)(1-this.values[which]);	
+			}
+			
 		}
 	}
 	
@@ -97,7 +104,7 @@ public class Individual implements Comparable<Individual> {
 		return offspring;
 	}
 	
-	/** Uniform crossover, produces two offspring*/
+	/** Uniform crossover, produces two offsprings */
 	public static Individual[] uniformXover(Individual mama, Individual papa){
 		Individual[] offspring = new Individual[2];
 		
@@ -106,10 +113,8 @@ public class Individual implements Comparable<Individual> {
 		Individual brother = new Individual(len);
 		Individual sister = new Individual(len);
 		
-		for (int i = 0; i < len; i++) {
-			double r = MyConstants.random.nextDouble();
-			
-			if(r>0.5){
+		for (int i = 0; i < len; i++) {			
+			if(MyConstants.random.nextDouble()>0.5){
 				brother.values[i]=mama.values[i];
 			} else{
 				brother.values[i]=papa.values[i];
@@ -117,9 +122,7 @@ public class Individual implements Comparable<Individual> {
 		}
 		
 		for (int i = 0; i < len; i++) {
-			double r = MyConstants.random.nextDouble();
-			
-			if(r>0.5){
+			if(MyConstants.random.nextDouble()>0.5){
 				sister.values[i]=mama.values[i];
 			} else{
 				sister.values[i]=papa.values[i];
@@ -137,6 +140,9 @@ public class Individual implements Comparable<Individual> {
 		return new String(Arrays.toString(values));
 	}
 	
-	
+	@Override
+	public int compareTo(Individual o) {
+		return Double.compare(this.fitness, o.fitness);
+	}
 
 }

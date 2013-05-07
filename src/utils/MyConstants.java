@@ -15,5 +15,13 @@ public abstract class MyConstants {
 	public static final boolean debug = true;
 	
 	/** Random number generator*/
-	public static final Random random = new Random(42);
+	public static final Random random = new Random(42+1);
+	
+	/** probability of mutation of individual */
+	public static final double prMut = 0.05;
+	
+	/** probability of crossover of two individuals */
+	public static final double prCross = 0.68;
+	
+	
 }
