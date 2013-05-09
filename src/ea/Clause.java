@@ -9,10 +9,10 @@ package ea;
 
 
 public class Clause {
-	public byte[][] literals;
+	public int[][] literals;
 
 	public Clause(int len) {
-		literals = new byte[2][len];
+		literals = new int[2][len];
 	}
 	
 	/** finds whether this clause is satisfied (return 1) or not*/
@@ -21,12 +21,12 @@ public class Clause {
 		boolean atLeastOneTrue = false;
 		
 		for (int i = 0; i < literals[1].length; i++) {
-			byte lit = literals[0][i];
-			byte val = values[lit];
+			int lit = literals[0][i];
+			int val = values[lit];
 			
-			byte res;
+			int res;
 			
-			if(literals[2][i] == 1){
+			if(literals[1][i] == 1){
 				res = val;
 			} else {
 				// literal in negative form, so we take the inverse value

@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -59,12 +58,12 @@ public class MyReader {
 					
 					int len = hlp.length;
 					
-					System.out.println("Clause len: " + len);
+					if(MyConstants.debug) System.out.println("Clause " + i +" len: " + len);
 					Clause cl = new Clause(len);
 					
 					for (int j = 0; j < len; j++) {
-						cl.literals[0][j]=Byte.parseByte(hlp[j]);
-						cl.literals[1][j]=Byte.parseByte(hlp2[j]);
+						cl.literals[0][j]=Integer.parseInt(hlp[j]);
+						cl.literals[1][j]=Integer.parseInt(hlp2[j]);
 					}
 					
 					formula.add(cl);

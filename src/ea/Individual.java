@@ -142,7 +142,8 @@ public class Individual implements Comparable<Individual> {
 	
 	@Override
 	public int compareTo(Individual o) {
-		return Double.compare(this.fitness, o.fitness);
+		// we want the max fitness
+		return (-1)*Double.compare(this.fitness, o.fitness);
 	}
 
 }
